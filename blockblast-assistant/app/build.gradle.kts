@@ -29,8 +29,22 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding = false
     }
+
+    // Ensure Java/Kotlin target compatibility matches JDK 17
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+// Use Kotlin JVM toolchain 17
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
