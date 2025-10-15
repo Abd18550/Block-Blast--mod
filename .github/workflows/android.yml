@@ -20,11 +20,18 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Install Android SDK
+      - name: Install Android SDK (cmdline-tools)
         uses: android-actions/setup-android@v3
         with:
-          api-level: 34
-          build-tools: 34.0.0
+          cmdline-tools-version: latest
+          accept-android-sdk-licenses: true
+
+      - name: Install required SDK packages
+        run: |
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-34" \
+            "build-tools;34.0.0"
 
       - name: Set up Gradle (provision Gradle without wrapper)
         uses: gradle/actions/setup-gradle@v3
@@ -63,8 +70,15 @@ jobs:
 
       - uses: android-actions/setup-android@v3
         with:
-          api-level: 34
-          build-tools: 34.0.0
+          cmdline-tools-version: latest
+          accept-android-sdk-licenses: true
+
+      - name: Install required SDK packages
+        run: |
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-34" \
+            "build-tools;34.0.0"
 
       - uses: gradle/actions/setup-gradle@v3
         with:
